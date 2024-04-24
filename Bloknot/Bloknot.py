@@ -103,3 +103,10 @@ def delallpar():
     for i in list_array_del:
         fi1111.writelines(i + "\n")
     fi1111.close()
+def main():
+    print("Начать запись")
+    print("Вывести заметки на экран")
+    print("Поиск")
+    print("Замена")
+    print("Удаление частично")
+    print("Удаление заметки")
