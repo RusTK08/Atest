@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 
@@ -22,7 +23,6 @@ def create_write():
     st = str(count)
     wr = open("BloknotSapis.csv", "a")
     print("Введите название заметки")
-    wr.writelines()
     wr.writelines("    ")
     wr.writelines(paragraph())
     wr.writelines("\n")
@@ -103,10 +103,38 @@ def delallpar():
     for i in list_array_del:
         fi1111.writelines(i + "\n")
     fi1111.close()
+def exit(arg):
+    while arg == 0: break
+# def priem():
+#     num = int(input())
+#     return num
 def main():
-    print("Начать запись")
-    print("Вывести заметки на экран")
-    print("Поиск")
-    print("Замена")
-    print("Удаление частично")
-    print("Удаление заметки")
+    print("1 Начать запись")
+    print("2 Вывести заметки на экран")
+    print("3 Поиск")
+    print("4 Замена")
+    print("5 Удаление частично")
+    print("6 Удаление заметки")
+    print("0 Выход")
+    com = int(input())
+    if(com == 1):
+        create_write()
+    if(com == 2):
+        read()
+    if(com == 3):
+        find()
+    if(com == 4):
+        zamena()
+    if(com == 5):
+        dele()
+    if(com == 6):
+        delallpar()
+    if(com == 0):
+        exit(com)
+def controlmain():
+    print("Введите любое число для запуска кроме 0 и ноль если завершить")
+    com1 = int(input())
+    while(com1 != 0):
+        main()
+        return controlmain()
+controlmain()
