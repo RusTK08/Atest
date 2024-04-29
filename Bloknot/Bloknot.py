@@ -140,10 +140,12 @@ def dele():
     for line in fi111:
         if(ww not in line):
             list_array.append(line)
+        elif(ww in line):
+            list_array.append(datenow() + "\n")
     fi111.close()
     fi1111 = open("BloknotSapis.csv", "w", encoding = "utf-8")
     for i in list_array:
-        fi1111.writelines(i + "\n")
+        fi1111.writelines(i)
     fi1111.close()
 def delallpar():
     list_array_del = []
