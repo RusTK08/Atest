@@ -23,7 +23,7 @@ def create_write():
     st = str(count)
     wr = open("BloknotSapis.csv", "a")
     print("Введите название заметки")
-    wr.writelines("    ")
+    wr.writelines("\t")
     wr.writelines(paragraph())
     wr.writelines("\n")
     print("Введите тело заметки")
@@ -50,26 +50,88 @@ def find():
     fi.close()
 #find()
 def zamena():
+    print("Введите 7 чтобы удалить заголовок или 8 чтобы заменить слово")
+    r = input()
     array = []
-    print("Введите слово для которого произвести замену")
-    finis = input()
-    count = 0
-    print("Введите слово для замены")
-    finis1 = input()
-    fi1 = open("BloknotSapis.csv", "r", encoding = "utf-8")
-    for line in fi1:
-        for i in line:
-            array.append(i)
+    if(r == 8):
+        fi1 = open("BloknotSapis.csv", "r", encoding = "utf-8")
+        for line in fi1:
+            array.append(line)
+            print("Введите слово для которого произвести замену")
+            finis = input()
+            print("Введите слово для замены")
+            finis1 = input()
+            for i in array:
+                for j in i.split():
+                    if(j == finis):
+                        val = array.index(i)
+                        safe = array[val]
+                        array.remove(i)
+                        ss = safe.split()
+                        for i1 in ss:
+                            if(i1 == finis):
+                                val1 = ss.index(i1)
+                                ss.remove(i1)
+                                indexpod = len(ss) - 1
+                                ss.pop(indexpod)
+                                ss.pop(indexpod - 1)
+                                ss.insert(indexpod - 1, datenow())
+                                ss.insert(val1, finis1)
+                                array.insert(val, " ".join(ss) + "\n")
+        fi1.close()
+        fi11 = open("BloknotSapis.csv", "w", encoding = "utf-8")
+        for i in array:
+            fi11.writelines(i)
+        fi11.close()
+    else:
+        print("Введите заголовок для которого произвести замену")
+        finis4 = input()
+        print("Введите новый заголовок для замены")
+        finis5 = input()
+        fi2 = open("BloknotSapis.csv", "r", encoding = "utf-8")
+        for line in fi2:
+            array.append(line)
+        fi2.close()
+        r1 = 0 #НАЧАЛО ИЗМ
+        length1 = len(array)
+        for i in array:
+            if(finis4 in i):
+                r1 = array.index(i)
+                array.pop(r1)
+                array.insert(r1, "\t" + finis5 + "\n")
+                print(array)
+        r2 = 0 #КОНЕЦ ИЗМ
+        if(array[r1 + 1] != array[length1 - 1]):
+            count = 1
+            while("\t" not in array[r1 + count]):
+                if("\t" in array[r1 + count + 1]):
+                    r2 = r1 + count
+                count += 1
+            safe2 = array[r2]
+            sss = safe2.split()
+            indexpod1 = len(sss) - 1
+            print(sss)
+            sss.pop()
+            print(sss)
+            sss.pop()
+            sss.insert(indexpod1, datenow())
+            array.pop(r2)
+            array.insert(r2, " ".join(sss) + "\n")
+        else: 
+            r2 = len(array) - 1 
+            array.pop(r2)
+            safe3 = array[r2]
+            ssss = safe3.split()
+            indexpod2 = len(ssss) - 1
+            ssss.pop()
+            ssss.pop()
+            ssss.insert(indexpod2, datenow())
+            array.insert(r2, " ".join(ssss) + "\n")
+        print(array)
+    fi3 = open("BloknotSapis.csv", "w", encoding = "utf-8")
     for i in array:
-        if(i == finis):
-            val = array.index(i)
-            array.remove(i)
-            array.insert(val, finis1 + " ")
-    fi1.close()
-    fi11 = open("BloknotSapis.csv", "w", encoding = "utf-8")
-    for i in array:
-        fi11.writelines(i)
-    fi11.close()
+        fi3.writelines(i)
+    fi3.close()
 def dele():
     list_array = []
     print("Введите слово из строки, которую хотите удалить")
@@ -80,7 +142,7 @@ def dele():
             list_array.append(line)
     fi111.close()
     fi1111 = open("BloknotSapis.csv", "w", encoding = "utf-8")
-    for i in array:
+    for i in list_array:
         fi1111.writelines(i + "\n")
     fi1111.close()
 def delallpar():
@@ -90,24 +152,55 @@ def delallpar():
     fi111 = open("BloknotSapis.csv", "r", encoding = "utf-8")
     for line in fi111:
         list_array_del.append(line)
+    print(list_array_del)
+    ind_nach = 0
+    indexend = 0
+    for i in list_array_del: ## ИЩЕМ НАЧАЛО, ИНДЕКС НУЖНОГО МЕСТА УДАЛЕНИЯ
+        for j in i.split():
+            if(j == www):
+                print(j + "Yes")
+                ind_nach = list_array_del.index(i)
+    length = len(list_array_del)
+    if(list_array_del[ind_nach + 1] != list_array_del[length - 1]):
+        count = 1
+        while("\t" not in list_array_del[ind_nach + count]):
+            print(list_array_del[ind_nach + count])
+            list_array_del.pop(ind_nach)
+            list_array_del.pop(ind_nach)
+            count = 0
+    else: 
+        indexend = len(list_array_del) - 1 
+        count1 = 0
+        while(list_array_del[indexend - count1] != list_array_del[ind_nach - 1]):
+            list_array_del.pop() # ЕСЛИ ИНДЕКС НЕ УКАЗАН УДАЛЯЕТСЯ ПОСЛЕДНИЙ ЭЛЕМЕНТ
+            count1 += 1
+    print(count)
+    print(list_array_del)
     fi111.close()
     fi1111 = open("BloknotSapis.csv", "w", encoding = "utf-8")
-    for i in array:
-        for j in i:
-            if(j == www):
-                ind_nach = list_array_del.index(i)
-                count = 0
-                while(j != "    "):
-                    list_array_del.pop(ind_nach + count)
-                    count += 1
     for i in list_array_del:
-        fi1111.writelines(i + "\n")
+        fi1111.writelines(i)
     fi1111.close()
+
+# def prov(argStr):
+#     isOnlyDigits = True
+#     count = 0
+#     numarr = ["1","2","3","4","5","6","7","8","9","0"]
+#     if(argStr == 10):
+#         if(argStr[2] == "-" | argStr[5] == "-"):
+#             for i in argStr:
+#                 if(i in numarr & argStr[count] != 2 & argStr[count] != 5): 
+#                     isOnlyDigits = True
+#                 else: isOnlyDigits = False
+#             count += 1
+#         else: isOnlyDigits = False
+#     return isOnlyDigits
+                        
+
+
 def exit(arg):
     while arg == 0: break
-# def priem():
-#     num = int(input())
-#     return num
+
 def main():
     print("1 Начать запись")
     print("2 Вывести заметки на экран")
