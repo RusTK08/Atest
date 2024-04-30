@@ -19,8 +19,6 @@ def paragraph():
     return vvv
 
 def create_write():
-    count = 0
-    st = str(count)
     wr = open("BloknotSapis.csv", "a")
     print("Введите название заметки")
     wr.writelines("\t")
@@ -32,6 +30,45 @@ def create_write():
     wr.writelines(" " + datenow())
     wr.writelines("\n")
     wr.close()
+    identifikation()
+
+def identifikation():
+    w2 = open("BloknotSapis.csv", "r", encoding = "utf-8")
+    array3 = []
+    for line in w2:
+        array3.append(line)
+    w2.close()
+    count4 = 1
+    for i5 in array3:
+        for j7 in i5:
+            if(j7 == i5[0]):
+                if(i5[1] == "\t"):
+                    count4 = int(i5[0]) + 1
+    for i in array3:
+        for j in i:
+            if(j == i[0]):
+                print("Yes")
+                if(j == "\t"):
+                    inw = array3.index(i)
+                    s5 = array3[inw]
+                    s6 = s5.split()
+                    print(s6)
+                    c44 = str(count4)
+                    s6.insert(0, c44 + "\t")
+                    print(s6)
+                    array3.pop(inw)
+                    array3.insert(inw, " ".join(s6) + "\n")
+                    count4 += 1
+    print(array3)
+    w3 = open("BloknotSapis.csv", "w", encoding = "utf-8")
+    for i in array3:
+        w3.writelines(i)
+    w3.close()
+
+
+
+
+
 #create_write()
 def read():
     re = open("BloknotSapis.csv", "r")
@@ -118,9 +155,9 @@ def zamena():
             array.pop(r2)
             array.insert(r2, " ".join(sss) + "\n")
         else: 
-            r2 = len(array) - 1 
+            r2 = len(array) - 1
+            safe3 = array[r2] 
             array.pop(r2)
-            safe3 = array[r2]
             ssss = safe3.split()
             indexpod2 = len(ssss) - 1
             ssss.pop()
@@ -132,6 +169,7 @@ def zamena():
     for i in array:
         fi3.writelines(i)
     fi3.close()
+    identifikation()
 def dele():
     list_array = []
     print("Введите слово из строки, которую хотите удалить")
