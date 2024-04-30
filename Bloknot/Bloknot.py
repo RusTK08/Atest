@@ -176,10 +176,18 @@ def dele():
     ww = input()
     fi111 = open("BloknotSapis.csv", "r", encoding = "utf-8")
     for line in fi111:
-        if(ww not in line):
-            list_array.append(line)
-        elif(ww in line):
-            list_array.append(datenow() + "\n")
+        list_array.append(line)
+    for i11 in list_array:
+        for j15 in i11.split():
+            if(j15 == ww):
+                iu = list_array.index(i11)
+                list_array.pop(iu)
+                list_array.insert(iu, datenow() + "\n")
+    # for line in fi111:
+    #     if(ww not in line):
+    #         list_array.append(line)
+    #     elif(ww in line):
+    #         list_array.append(datenow() + "\n")
     fi111.close()
     fi1111 = open("BloknotSapis.csv", "w", encoding = "utf-8")
     for i in list_array:
