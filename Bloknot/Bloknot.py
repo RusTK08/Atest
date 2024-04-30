@@ -88,16 +88,16 @@ def find():
 #find()
 def zamena():
     print("Введите 7 чтобы удалить заголовок или 8 чтобы заменить слово")
-    r = input()
+    r = int(input())
     array = []
     if(r == 8):
         fi1 = open("BloknotSapis.csv", "r", encoding = "utf-8")
+        print("Введите слово для которого произвести замену")
+        finis = input()
+        print("Введите слово для замены")
+        finis1 = input()
         for line in fi1:
             array.append(line)
-            print("Введите слово для которого произвести замену")
-            finis = input()
-            print("Введите слово для замены")
-            finis1 = input()
             for i in array:
                 for j in i.split():
                     if(j == finis):
@@ -120,7 +120,7 @@ def zamena():
         for i in array:
             fi11.writelines(i)
         fi11.close()
-    else:
+    if(r == 7):
         print("Введите заголовок для которого произвести замену")
         finis4 = input()
         print("Введите новый заголовок для замены")
