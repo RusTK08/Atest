@@ -222,7 +222,7 @@ def delallpar():
         while(list_array_del[indexend - count1] != list_array_del[ind_nach - 1]):
             list_array_del.pop() # ЕСЛИ ИНДЕКС НЕ УКАЗАН УДАЛЯЕТСЯ ПОСЛЕДНИЙ ЭЛЕМЕНТ
             count1 += 1
-    print(count)
+    #print(count)
     print(list_array_del)
     fi111.close()
     fi1111 = open("BloknotSapis.csv", "w", encoding = "utf-8")
